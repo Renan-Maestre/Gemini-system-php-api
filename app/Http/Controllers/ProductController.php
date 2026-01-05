@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function show($id)
     {
 
-        return ProductResource(Product::findOrFail($id));
+        return new ProductResource(Product::findOrFail($id));
     }
 
 //    Update

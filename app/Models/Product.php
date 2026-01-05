@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Product extends Model
 {
     use HasUuids;
@@ -27,9 +28,9 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id', 'uuid');
     }
 
-//    public function user()
-//    {
-//        return $this->belongsTo(User::class);
-//    }
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
 }

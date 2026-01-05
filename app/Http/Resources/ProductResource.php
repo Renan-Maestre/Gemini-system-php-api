@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ProductResource extends JsonResource
 {
     /**
-     * Transform the resource into an array.
+     * Transform the resource into an array.ll
      *
      * @return array<string, mixed>
      */
@@ -19,9 +19,9 @@ class ProductResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'price' => (float) $this->price,
+            'price' => (float)$this->price,
             'quantity' => $this->quantity,
-            'status' => (bool) $this->status,
+            'status' => (bool)$this->status,
             'image' => $this->image,
             'category' => [
                 'uuid' => $this->category_id,

@@ -10,14 +10,16 @@ class CategoryController extends Controller
 {
     public function store(StoreCategoryRequest $request)
     {
-        $category = Category::create($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = auth()->id();
 
-        return new CategoryResource($category,201);
+        $category = Category::create($data);
+        return new CategoryResource($category);
     }
 
     public function index()
     {
-        return CategoryResource::collection(Category::all());
+        return CategoryResource::collection(auth()->user()->categories);
     }
 
     public function show($id)

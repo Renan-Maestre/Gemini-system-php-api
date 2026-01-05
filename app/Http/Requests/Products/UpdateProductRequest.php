@@ -24,22 +24,38 @@ class UpdateProductRequest extends FormRequest
         $isPatch = $this->method() == 'PATCH';
 
         return [
-            'nome' => [
+            'name' => [
                 $isPatch ? 'sometimes' : 'required',
                 'string',
                 'min:3',
                 'max:255',
             ],
-            'preco' =>[
+            'description' => [
+                'nullable',
+                'string',
+            ],
+            'price' => [
                 $isPatch ? 'sometimes' : 'required',
                 'numeric',
-                'min:1',
-
+                'min:0.01',
             ],
-            'categoria_id' => [
+            'quantity' => [
                 $isPatch ? 'sometimes' : 'required',
                 'integer',
-            ]
+                'min:0',
+            ],
+            'category_id' => [
+                $isPatch ? 'sometimes' : 'required',
+                'exists:categories,uuid',
+            ],
+            'status' => [
+                'sometimes',
+                'boolean',
+            ],
+            'image' => [
+                'nullable',
+                'string',
+            ],
         ];
     }
 }
