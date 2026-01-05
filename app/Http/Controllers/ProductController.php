@@ -26,14 +26,14 @@ class ProductController extends Controller
 //    List all
     public function index()
     {
-        return ProductResource::collection(Product::all());
+        return ProductResource::collection(auth()->user()->products);
     }
 
 //    List by id
     public function show($id)
     {
 
-        return new ProductResource(Product::findOrFail($id));
+        return ProductResource(Product::findOrFail($id));
     }
 
 //    Update
