@@ -55,6 +55,9 @@ class UpdateProductRequest extends FormRequest
             'image' => [
                 'nullable',
                 'string',
+                'image',
+                'mimes:jpeg,png,jpg,webp',
+                'max:2048',
             ],
         ];
     }

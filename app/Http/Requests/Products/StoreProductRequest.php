@@ -30,7 +30,7 @@ class StoreProductRequest extends FormRequest
             'quantity' => 'required|integer|min:1',
             'category_id' => 'required|exists:categories,uuid',
             'status' => 'boolean',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
 
         ];
     }

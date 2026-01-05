@@ -16,4 +16,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('product', ProductController::class);
     Route::apiResource('category', CategoryController::class);
 
+    Route::post('product/{uuid}/image', [ProductController::class, 'updateImage']);
+
 });

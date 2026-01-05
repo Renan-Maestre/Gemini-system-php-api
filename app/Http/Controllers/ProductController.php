@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Products\StoreProductRequest;
 use App\Http\Requests\Products\UpdateProductRequest;
+use App\Http\Requests\Products\UpdateProductImageRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
-
 
 class ProductController extends Controller
 {
@@ -16,6 +17,13 @@ class ProductController extends Controller
     {
         $data = $request->validated();
         $data['user_id'] = auth()->id();
+
+
+        //verifica se tem imagem
+        if($request->hasFile('image')){
+            $path = $request->file('image')->store('products', 'public');
+            $data['image'] = $path;
+        }
 
         $product = Product::create($data);
 
@@ -48,6 +56,28 @@ class ProductController extends Controller
         return new ProductResource($produto);
 
 
+    }
+
+    public function updateImage(UpdateProductImageRequest $request, $uuid)
+    {
+
+        $product = Product::findOrFail($uuid);
+
+
+        Gate::authorize('update', $product);
+
+
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+
+
+        $path = $request->file('image')->store('products', 'public');
+
+
+        $product->update(['image' => $path]);
+
+        return new ProductResource($product);
     }
 
 //    Delete
