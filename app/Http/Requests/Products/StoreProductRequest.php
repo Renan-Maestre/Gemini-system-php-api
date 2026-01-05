@@ -24,9 +24,13 @@ class StoreProductRequest extends FormRequest
     {
         return [
 
-            'nome' => 'required|string|max:255|min:3',
-            'preco' => 'required|numeric|min:1',
-            'category_id' => 'required|exists:categories,id',
+            'name' => 'required|string|max:255|min:3',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0.01',
+            'quantity' => 'required|integer|min:0',
+            'category_id' => 'required|exists:categories,uuid',
+            'status' => 'boolean',
+            'image' => 'nullable|string',
 
         ];
     }
