@@ -5,6 +5,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\GoogleController;
+use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 
 //Rotas públicas
@@ -24,5 +26,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('clients', ClientController::class);
 
     Route::post('product/{uuid}/image', [ProductController::class, 'updateImage']);
+
+    Route::get('/me', function (Request $request) {
+        return new \App\Http\Resources\UserResource($request->user());
+    });
 
 });

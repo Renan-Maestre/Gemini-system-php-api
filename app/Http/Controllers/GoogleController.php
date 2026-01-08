@@ -29,6 +29,7 @@ class GoogleController extends Controller
                     'name' => $googleUser->name,
                     'email' => $googleUser->email,
                     'google_id' => $googleUser->id,
+                    'avatar' => $googleUser->avatar,
                     'password' => bcrypt(Str::random(16)),
                 ]);
             }
@@ -36,7 +37,7 @@ class GoogleController extends Controller
             //  Gera o Token do Sanctum (Seguindo o padrão do seu AuthController)
             $token = $user->createToken('auth_token')->plainTextToken;
 
-            //  Redireciona para o  frontend  passando o token na URL
+            //  Redireciona para o frontend  passando o token na URL
             // O Vue deve capturar esse token e salvar no localStorage
             $frontendUrl = env('FRONT_END_URL', 'http://localhost:5174');
             return redirect()->away($frontendUrl . "/auth/callback?token={$token}");
